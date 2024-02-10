@@ -1,6 +1,7 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import gameEngine.Drawable;
 import gameEngine.GameEngine;
 import levelPieces.Gumball;
+import levelPieces.Sock;
 
 public class TestMovingPieces {
     public void testGumballMovesRight() {
@@ -28,4 +30,22 @@ public class TestMovingPieces {
         assertNotNull("Gumball did not move to the right.", gameBoard[initialPosition + 1]);
         assertEquals("Gumball is not at the expected right position.", gumball, gameBoard[initialPosition + 1]);
     }
+    
+    public void testRandomMovement() {
+	    Drawable[] gameBoard = new Drawable[GameEngine.BOARD_SIZE];
+	    Sock sock = new Sock();
+	    int initialLocation = sock.getLocation();
+	    gameBoard[initialLocation] = sock;
+	    
+	    // Move the sock a significant number of times to ensure randomness
+	    for (int i = 0; i < 100; i++) {
+	        sock.move(gameBoard, -1);
+	        gameBoard[sock.getLocation()] = sock;
+	        gameBoard[initialLocation] = null;
+	        initialLocation = sock.getLocation();
+	    }
+	    
+	    assertNotEquals(initialLocation, sock.getLocation());
+	}
+    
 }
