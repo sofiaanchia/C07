@@ -18,7 +18,7 @@ import levelPieces.Sock;
 public class TestMovingPieces {
 	
 	/**
-	 testing gumball
+	 testing gumball to see if it appears at the next location in the gameboard array after a move
 	 * */
 	@Test
     public void testGumballMovesRight() {
@@ -38,7 +38,9 @@ public class TestMovingPieces {
         assertNotNull("Gumball did not move to the right.", gameBoard[initialPosition + 1]);
         assertEquals("Gumball is not at the expected right position.", gumball, gameBoard[initialPosition + 1]);
     }
-    
+    /*
+     * tests to see if if remains at its original location after randomly selecting a new location.
+     */
 	@Test
     public void testRandomMovement() {
 	    Drawable[] gameBoard = new Drawable[GameEngine.BOARD_SIZE];
